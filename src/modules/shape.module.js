@@ -116,8 +116,12 @@ export class ShapeModule extends Module {
   }
 
   remove() {
+
     clearInterval(this.#action);
-    this.#figure.remove();
+    if(this.#figure){
+      this.#figure.remove();
+    }
+    
   }
 
   trigger() {

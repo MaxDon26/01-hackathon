@@ -12,28 +12,29 @@ export class BackgroundModule extends Module {
 
 
     trigger() {
-        
-        this.clearBtn = document.createElement('button')
-        this.clearBtn.className = 'clear_button'
-        this.clearBtn.textContent = "Остановить цвет"
-        document.body.append(this.clearBtn);
+        if(!this.clearBtn){
+            this.clearBtn = document.createElement('button')
+            this.clearBtn.className = 'clear_button'
+            this.clearBtn.textContent = "Остановить цвет"
+            document.body.append(this.clearBtn);
+        }
         
         this.clearBtn.addEventListener('click', () => {
             clearInterval(this.interval);
+            delete this.interval
             this.clearBtn.remove()
+            delete this.clearBtn
         })
 
-        
         const rgbArr = [];
-        this.interval = setInterval(() => {
-            for (let i = 0; i < 3; i++ ) {
-                const elemRgbArr = random(0, 255)
-                rgbArr[i]=elemRgbArr;
-            }
-                
-                this.body.style.background =  `rgb(${rgbArr.join(', ')})`
-                console.log(rgbArr);
-                },2000)
-        
+        if(!this.interval){
+            this.interval = setInterval(() => {
+                for (let i = 0; i < 3; i++ ) {
+                    const elemRgbArr = random(0, 255)
+                    rgbArr[i]=elemRgbArr;
+                }
+                    this.body.style.background =  `rgb(${rgbArr.join(', ')})`
+                    },2000)
+        }  
     }
 }
