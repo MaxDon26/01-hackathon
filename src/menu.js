@@ -5,6 +5,7 @@ import { ClicksModule } from './modules/clicks.module';
 import { ShapeModule } from './modules/shape.module';
 import { TimerModule } from './modules/timer.module'
 import { MessageModule } from './modules/message.module';
+import { SoundModule } from './modules/sound.module';
 export class ContextMenu extends Menu {
     
     constructor(selector){
@@ -29,11 +30,12 @@ export class ContextMenu extends Menu {
     run() {
         const modules = [];
         const background = new BackgroundModule('Background', 'Поменять цвет фона')
-        const clickMod = new ClicksModule('Click', 'Посчитать клики')
-        const figure = new ShapeModule('Figure', 'Добавить случайную фигуру')
-        const timer = new TimerModule("Timer", "Добавить таймер");
-        const message = new MessageModule("Message", "Добавить блок с сообщением")
-        modules.push(background, clickMod, figure, timer, message)
+        const clickMod = new ClicksModule('Click', 'Посчитать клики за 10 секунд');
+        const figure = new ShapeModule('Figure', 'Добавить случайную фигуру');
+        const timer = new TimerModule('Timer', 'Добавить таймер');
+        const message = new MessageModule('Message', 'Добавить блок с сообщением');
+        const sound  = new SoundModule('Sound', 'Воспроизвести случайный звук')
+        modules.push(background, clickMod, figure, timer, message, sound)
 
         modules.forEach(module => this.add(module))
 
@@ -55,17 +57,19 @@ export class ContextMenu extends Menu {
                     figure.remove()
                     figure.trigger()
                     break;
-                case "Message":
+                case 'Message':
                     message.trigger()
                     figure.remove()
                     break;
+                case 'Sound':
+                    sound.stop()
+                    sound.trigger()
+                    break;
+                case 'Timer':
+                    timer.trigger();
             }
         })
-        
-        
-        
-        
-        
+
         document.body.addEventListener('contextmenu', (event) => {
             event.preventDefault()
             this.el.style.top = `${event.offsetY}px`

@@ -4,8 +4,8 @@ export class ClicksModule extends Module {
  
     constructor(type, text){
         super(type, text);
-        this.body= document.querySelector('body');
         this.clickcount  = 0;
+        this.dblclickCount = 0
         this.divPopup = document.createElement('div')
     }
  #createMassage(text){
@@ -21,19 +21,22 @@ export class ClicksModule extends Module {
  }
    
     trigger(){
+      
+        document.body.addEventListener('dblclick', () => {
+            this.dblclickCount++
+        })        
 
-          
-       this.body.addEventListener('click', () => {
+       document.body.addEventListener('click', () => {
+           
            this.clickcount++
        })  
 
        setTimeout(  () => { 
-           this.text =  `You clicked ${this.clickcount} times`
-           console.log(this.text);
-          
+           this.text =  `You clicked ${this.clickcount} times, double clicked ${this.dblclickCount}`
+
            document.body.append( this.#createMassage(this.text))
            setTimeout(() => {
-               document.body.remove( this.#createMassage(this.text))
+            this.divPopup.remove()
            },5000)
        }, 10000);
     }

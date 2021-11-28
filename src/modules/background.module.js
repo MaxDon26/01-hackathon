@@ -34,7 +34,7 @@ export class BackgroundModule extends Module {
                     rgbArr[i]=elemRgbArr;
                 }
                     this.body.style.background =  `rgb(${rgbArr.join(', ')})`
-                    },2000)
+                    },1000)
         }  
     }
 }

@@ -13,12 +13,24 @@ export class SoundModule extends Module {
     constructor(type, text){
         super(type, text);
         this.sounds =  [SOUND_1, SOUND_2, SOUND_3, SOUND_4, SOUND_5, SOUND_6, SOUND_7]    
+        this.sound;
+        this.index;
+    }
+
+    stop() {
+        if(this.sound){
+            this.sound.pause();
+            this.sound.currentTime = 0;
+        }
     }
    
     trigger() {
-        const index = this.sounds[random(0, this.sounds.length-1)];
-        console.log(index)
-        new Audio(index).play();
-        document.body.addEventListener('click',  new Audio(index).play(), false)
-    } 
+       
+        this.index = this.sounds[random(0, this.sounds.length-1)]
+        this.sound = new Audio(this.index);
+        this.sound.play();  
+        
+    }   
+    
+    
 }
