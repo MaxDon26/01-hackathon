@@ -6,29 +6,36 @@ export class ClicksModule extends Module {
         super(type, text);
         this.body= document.querySelector('body');
         this.clickcount  = 0;
-
+        this.divPopup = document.createElement('div')
     }
+ #createMassage(text){
 
-    trigger() {
-        this.clickcount  = 0;    
-        this.body.addEventListener('click', () => {
-            this.clickcount++
-        })  
+  
+    this.divPopup.className = 'b-popup';
+    const divPopupContent = document.createElement('div');
+    divPopupContent.className = 'b-popup-content';
+    divPopupContent.textContent = text;
+    this.divPopup.append(divPopupContent);
 
-        setTimeout(  () => { 
-            this.text =  `You clicked ${this.clickcount} times.`
-            console.log(this.text);
-            const result = document.createElement('h1')
-            result.innerHTML = `You clicked ${this.clickcount} times.`
-            document.body.append(result)
-            setTimeout(() => {
-                result.remove()
-            },5000)
-        }, 10000);
-        
-            
-      
+    return this.divPopup
+ }
+   
+    trigger(){
 
-    }  
+          
+       this.body.addEventListener('click', () => {
+           this.clickcount++
+       })  
+
+       setTimeout(  () => { 
+           this.text =  `You clicked ${this.clickcount} times`
+           console.log(this.text);
+          
+           document.body.append( this.#createMassage(this.text))
+           setTimeout(() => {
+               document.body.remove( this.#createMassage(this.text))
+           },5000)
+       }, 10000);
+    }
 
 }
