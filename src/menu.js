@@ -1,4 +1,5 @@
 import {Menu} from './core/menu'
+<<<<<<< HEAD
 import { Module } from './core/module';
 
 export class ContextMenu extends Menu {
@@ -32,4 +33,9 @@ export class ContextMenu extends Menu {
             this.open()
         })
     }
+=======
+
+export class ContextMenu extends Menu {
+
+>>>>>>> ebe0cadab2e3848a684a78b1e9f181d895291f62
 }
