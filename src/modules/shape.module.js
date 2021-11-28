@@ -2,6 +2,7 @@ import { Module } from "../core/module";
 import { random } from "../utils";
 
 export class ShapeModule extends Module {
+  #action;
   #figure;
   #width;
   #height;
@@ -114,7 +115,6 @@ export class ShapeModule extends Module {
     this.#figure.style.top = `${this.state.coordinateY}px`;
   }
 
-  
   remove() {
     clearInterval(this.#action);
     this.#figure.remove();
@@ -124,6 +124,6 @@ export class ShapeModule extends Module {
     // создать и срендерить элемент
     this.createElement();
     //запуск движения
-    setInterval(() => this.move(), this.#timeout);
+    this.#action = setInterval(() => this.move(), this.#timeout);
   }
 }
