@@ -10,12 +10,12 @@ export class ShapeModule extends Module {
   #speedY;
   #border;
   #colors;
+  #action;
 
   constructor(type, text) {
     super(type, text);
 
     // выбор направления движения
-
     random(0, 1) > 0.5 ? (this.#speedX = 1) : (this.#speedX = -1);
     random(0, 1) > 0.5 ? (this.#speedY = 1) : (this.#speedY = -1);
     // возможные цвета
@@ -113,11 +113,15 @@ export class ShapeModule extends Module {
     this.#figure.style.left = `${this.state.coordinateX}px`;
     this.#figure.style.top = `${this.state.coordinateY}px`;
   }
+  remove() {
+    clearInterval(this.#action);
+    this.#figure.remove();
+  }
 
   trigger() {
     // создать и срендерить элемент
     this.createElement();
     //запуск движения
-    setInterval(() => this.move(), this.#timeout);
+    this.#action = setInterval(() => this.move(), this.#timeout);
   }
 }
