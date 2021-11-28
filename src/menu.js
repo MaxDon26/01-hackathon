@@ -3,7 +3,7 @@ import { Module } from './core/module';
 import { BackgroundModule } from './modules/background.module';
 import { ClicksModule } from './modules/clicks.module';
 import { ShapeModule } from './modules/shape.module';
-
+import { TimerModule } from './modules/timer.module'
 export class ContextMenu extends Menu {
     
     constructor(selector){
@@ -30,10 +30,11 @@ export class ContextMenu extends Menu {
         const background = new BackgroundModule('Background', 'Поменять цвет фона')
         const clickMod = new ClicksModule('Click', 'Посчитать клики')
         const figure = new ShapeModule('Figure', 'Добавить случайную фигуру')
-
+        const timer = new TimerModule("Timer", "Добавить таймер");
         this.add(background)
         this.add(clickMod)
         this.add(figure)
+        this.add(timer)
 
         this.el.addEventListener('click', (event) => {
 

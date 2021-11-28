@@ -14,6 +14,7 @@ export class BackgroundModule extends Module {
     trigger() {
         
         this.clearBtn = document.createElement('button')
+        this.clearBtn.className = 'clear_button'
         this.clearBtn.textContent = "Остановить цвет"
         document.body.append(this.clearBtn);
         
