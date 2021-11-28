@@ -114,6 +114,12 @@ export class ShapeModule extends Module {
     this.#figure.style.top = `${this.state.coordinateY}px`;
   }
 
+  
+  remove() {
+    clearInterval(this.#action);
+    this.#figure.remove();
+  }
+
   trigger() {
     // создать и срендерить элемент
     this.createElement();
