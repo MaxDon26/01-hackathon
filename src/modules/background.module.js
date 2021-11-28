@@ -1,25 +1,38 @@
 import {Module} from '../core/module'
-<<<<<<< HEAD
-
-export class BackgroundModule extends Module {
-
-=======
 import {random} from '../utils'
 
 export class BackgroundModule extends Module {
 
     constructor(type, text) {
         super(type, text);
-        this.body = document.querySelector('body');
+        this.body = document.body;
+        this.interval;
+        this.clearBtn;
     }
 
+
     trigger() {
-        let rgbArr = [];
-        for (let i = 0; i < 3; i++ ) {
-            const elemRgbArr = random(0, 255)
-            rgbArr.push(elemRgbArr);
-        }
-        this.body.style = `background: rgb(${rgbArr.join(', ')})`
+        
+        this.clearBtn = document.createElement('button')
+        this.clearBtn.textContent = "Остановить цвет"
+        document.body.append(this.clearBtn);
+        
+        this.clearBtn.addEventListener('click', () => {
+            clearInterval(this.interval);
+            this.clearBtn.remove()
+        })
+
+        
+        const rgbArr = [];
+        this.interval = setInterval(() => {
+            for (let i = 0; i < 3; i++ ) {
+                const elemRgbArr = random(0, 255)
+                rgbArr[i]=elemRgbArr;
+            }
+                
+                this.body.style.background =  `rgb(${rgbArr.join(', ')})`
+                console.log(rgbArr);
+                },2000)
+        
     }
->>>>>>> ebe0cadab2e3848a684a78b1e9f181d895291f62
 }

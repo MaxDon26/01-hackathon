@@ -9,28 +9,26 @@ export class ClicksModule extends Module {
 
     }
 
-    #enableCountingClicks() {
-        
-       return  ()=> {
-       
-            ++ this.clickcount 
-            
-            setTimeout(  () => { 
-               
-                this.text =  `You clicked ${this.clickcount} times.`
-              //  console.log(this.text);
-                this.body.innerHTML =this.toHTML(this.text)
-               
-        }, 2000);   
-      
-        }   
-       
-    }  
-    init(){
+    trigger() {
+        this.clickcount  = 0;    
+        this.body.addEventListener('click', () => {
+            this.clickcount++
+        })  
 
-        this.body.addEventListener('click', this.#enableCountingClicks(), false)
+        setTimeout(  () => { 
+            this.text =  `You clicked ${this.clickcount} times.`
+            console.log(this.text);
+            const result = document.createElement('h1')
+            result.innerHTML = `You clicked ${this.clickcount} times.`
+            document.body.append(result)
+            setTimeout(() => {
+                result.remove()
+            },5000)
+        }, 10000);
         
-        
-    }
+            
+      
+
+    }  
 
 }
